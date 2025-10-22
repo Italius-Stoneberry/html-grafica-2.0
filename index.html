@@ -1,103 +1,59 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GraficARTE - Diseño y Gráfica Aplicada</title>
+    <title>GraficARTE - Gráfica y Diseño Vanguardista</title>
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="icon" type="image/png" href="img/paginaicono.ico.png"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-    <header class="main-header">
-        <div class="header-pattern-area"></div>
-        
-        <div class="header-content">
-            <div class="logo-container">
-                <img src="logo.png" alt="GraficARTE Gráfica Aplicada Logo" class="logo">
+    <header class="modern-header">
+        <div class="logo-container">
+            <img src="img/logo.png" alt="GraficARTE Logo" class="logo">
+            <div class="logo-text">
                 <h1>GraficARTE</h1>
-                <p>GRÁFICA APLICADA</p>
+                <p>GRÁFICA APLICADA Y SOLUCIONES 3D</p>
             </div>
-            <nav class="main-nav">
-                </nav>
         </div>
+        <nav class="main-nav">
+            <a href="#galeria">Trabajos</a>
+            <a href="#clientes">Clientes</a>
+            <a href="#contacto" class="btn-contact-header">Contacto</a>
+        </nav>
     </header>
 
-    <section class="video-section">
+    <section class="hero-video-section">
+        <div class="video-overlay"></div>
         <div class="video-responsive">
             <iframe 
-                src="https://www.youtube.com/embed/VIDEO_ID_DE_YOUTUBE?autoplay=1&mute=1&loop=1&playlist=VIDEO_ID_DE_YOUTUBE" 
+                src="https://www.youtube.com/embed/VIDEO_ID_DE_YOUTUBE?controls=0&autoplay=1&mute=1&loop=1&playlist=VIDEO_ID_DE_YOUTUBE" 
                 frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allow="autoplay; encrypted-media; gyroscope;" 
                 allowfullscreen>
             </iframe>
         </div>
+        <div class="hero-text-content">
+            <h2>Transformamos Ideas en Impacto Visual</h2>
+            <p>Especialistas en gráfica aplicada, branding y prototipado 3D para potenciar tu marca.</p>
+            <a href="#contacto" class="btn-primary">Empezá tu Proyecto</a>
+        </div>
     </section>
 
-    <section class="gallery-section">
-        <h2 class="section-title">Nuestros Trabajos</h2>
+    <section class="clients-section" id="clientes">
+        <h3>Confían en nuestro trabajo</h3>
+        <div class="logo-carousel-track">
+            <img src="img/logo-cliente-1.png" alt="Logo Cliente 1">
+            <img src="img/logo-cliente-2.png" alt="Logo Cliente 2">
+            <img src="img/logo-cliente-3.png" alt="Logo Cliente 3">
+            <img src="img/logo-cliente-4.png" alt="Logo Cliente 4">
+            <img src="img/logo-cliente-5.png" alt="Logo Cliente 5">
+            <img src="img/logo-cliente-1.png" alt="Logo Cliente 1">
+            <img src="img/logo-cliente-2.png" alt="Logo Cliente 2">
+            <img src="img/logo-cliente-3.png" alt="Logo Cliente 3">
+            </div>
+    </section>
+
+    <section class="gallery-section" id="galeria">
+        <h2 class="section-title">Portafolio Destacado</h2>
         <div class="work-gallery">
-            <div class="gallery-item">
-                <img src="trabajo-1.jpg" alt="Tarjeta de presentación">
-                <div class="item-overlay">
-                    <p>Diseño y Producción de Tarjetas de Presentación de Lujo.</p>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="trabajo-2.jpg" alt="Stickers troquelados">
-                <div class="item-overlay">
-                    <p>Producción de Stickers y Etiquetas Troqueladas para productos.</p>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="trabajo-3.jpg" alt="Vinilo vehicular">
-                <div class="item-overlay">
-                    <p>Rotulación y Vinilado de Flotas Vehiculares Comerciales.</p>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="trabajo-4.jpg" alt="Pins y Merchandising">
-                <div class="item-overlay">
-                    <p>Diseño y Fabricación de Merchandising: Pins, Llaveros, etc.</p>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="trabajo-5.jpg" alt="Estampado textil">
-                <div class="item-overlay">
-                    <p>Estampado de Remeras y Textil con Técnicas de Serigrafía.</p>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="trabajo-6.jpg" alt="Logo corporativo">
-                <div class="item-overlay">
-                    <p>Diseño de Logos y Creación de Identidad Corporativa.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="banner-3d">
-        <div class="banner-content-wrapper">
-             <h2>IMPRESIONES 3D</h2>
-            <p>Diseño, prototipado y producción con tecnología de impresión 3D.</p>
-        </div>
-    </section>
-
-    <footer class="main-footer">
-        <h2 class="section-title">Contacto</h2>
-        <div class="contact-links">
-            <a href="https://wa.me/TUNUMERO" target="_blank" class="contact-button whatsapp">
-                WhatsApp
-            </a>
-            <a href="mailto:TUEMAIL@dominio.com" target="_blank" class="contact-button mail">
-                Mail
-            </a>
-            <a href="https://instagram.com/TUUSUARIO" target="_blank" class="contact-button instagram">
-                Instagram
-            </a>
-        </div>
-        <p class="copyright">&copy; 2024 GraficARTE. Todos los derechos reservados. | Desarrollado con HTML y CSS.</p>
-    </footer>
-
-</body>
-</html>

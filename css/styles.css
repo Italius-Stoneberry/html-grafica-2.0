@@ -6,270 +6,430 @@
 }
 
 body {
-    font-family: Arial, sans-serif; /* Reemplazar con tu fuente */
+    font-family: 'Poppins', sans-serif;
     line-height: 1.6;
-    background-color: #f4f4f4; /* Fondo claro general */
+    background-color: #ffffff; /* Fondo blanco (moderno) */
     color: #333;
 }
 
-/* COLORES CORPORATIVOS (Para facilitar la modificación) */
+/* COLORES CORPORATIVOS (Acentuando el contraste) */
 :root {
-    --color-primary: #ff9900; /* Naranja/Dorado */
-    --color-secondary: #000000; /* Negro */
+    --color-primary: #ff9900; /* Naranja/Dorado de Acero */
+    --color-secondary: #222222; /* Negro Profundo */
+    --color-background-light: #f7f7f7;
     --color-text-light: #ffffff; 
-    --color-text-dark: #333333;
 }
 
-/* ================================================= */
-/* 1. HEADER Y NAVEGACIÓN */
-/* ================================================= */
-
-.main-header {
-    position: relative;
-    overflow: hidden; /* Para contener el patrón superior */
-}
-
-/* DIV ROJO DE EJEMPLO (o patrón de fondo) */
-.header-pattern-area {
-    /* ⚠️ Este es el div que usarías para colocar tu fondo/patrón superior */
-    height: 80px; /* Altura de tu área de patrón */
-    background-color: var(--color-secondary); /* Color negro para contraste */
-    /* Aquí podrías usar una imagen de fondo o un gradiente */
-    /* background-image: url('tu-patron-dorado.jpg'); 
-       background-size: cover; */
-}
-
-.header-content {
-    /* Centra el logo debajo del patrón */
-    max-width: 1200px;
-    margin: -40px auto 20px; /* Sube el contenido para superponerse al patrón */
-    padding: 0 20px;
+/* UTILIDADES Y BOTONES */
+.section-title {
     text-align: center;
-    position: relative; /* Asegura que el contenido quede por encima */
-    z-index: 10;
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 50px;
+    color: var(--color-secondary);
+}
+
+.btn-primary, .btn-secondary {
+    display: inline-block;
+    padding: 12px 30px;
+    margin-top: 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+}
+
+.btn-primary:hover {
+    background-color: #e68a00;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+}
+
+
+/* ================================================= */
+/* 1. HEADER MODERNO Y LOGO */
+/* ================================================= */
+
+.modern-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 15px 40px;
+    background-color: var(--color-text-light);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Sutil sombra */
 }
 
 .logo-container {
-    padding: 10px 0;
-    /* Estilos del logo (simulando el diseño de la captura) */
+    display: flex;
+    align-items: center;
 }
 
 .logo-container .logo {
-    width: 60px; /* Tamaño del logo */
-    height: 60px;
-    display: block;
-    margin: 0 auto;
+    width: 40px;
+    margin-right: 10px;
 }
 
-.logo-container h1 {
-    font-size: 1.8em;
-    font-weight: bold;
+.logo-text h1 {
+    font-size: 1.4em;
+    font-weight: 700;
+    line-height: 1;
     color: var(--color-secondary);
-    margin-top: 5px;
 }
 
-.logo-container p {
-    font-size: 0.8em;
-    color: #666;
-    letter-spacing: 2px;
+.logo-text p {
+    font-size: 0.7em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: var(--color-secondary);
+    margin-left: 30px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.main-nav a:hover {
+    color: var(--color-primary);
+}
+
+.btn-contact-header {
+    background-color: var(--color-primary);
+    color: var(--color-text-light) !important;
+    padding: 8px 15px;
+    border-radius: 5px;
 }
 
 
 /* ================================================= */
-/* 2. SECCIÓN DE VIDEO (RESPONSIVE) */
+/* 2. SECCIÓN HÉROE CON VIDEO INTEGRADO */
 /* ================================================= */
 
-.video-section {
-    width: 100%;
-    margin-bottom: 40px;
-    background-color: #000; /* Fondo negro como en la captura */
+.hero-video-section {
+    position: relative;
+    height: 70vh; /* Ocupa el 70% de la altura de la ventana */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .video-responsive {
-    position: relative;
-    padding-bottom: 56.25%; /* Relación de aspecto 16:9 (altura / ancho = 9 / 16 = 0.5625) */
-    height: 0;
-    overflow: hidden;
-    max-width: 1200px; /* Limita el ancho si deseas un margen */
-    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* Truco para hacer el iframe de video de YouTube 'cover' (cubrir) */
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
 }
 
 .video-responsive iframe {
+    width: 100vw;
+    height: 56.25vw; /* 100/56.25 = 1.777 (16:9) */
+    min-height: 100%;
+    min-width: 177.77vh; /* 16/9 = 1.7777 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.video-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Oscurece el video para que el texto resalte */
+    z-index: 10;
+}
+
+.hero-text-content {
+    position: relative;
+    z-index: 20;
+    color: var(--color-text-light);
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.hero-text-content h2 {
+    font-size: 3.5em;
+    font-weight: 700;
+    margin-bottom: 15px;
+    line-height: 1.1;
+}
+
+.hero-text-content p {
+    font-size: 1.2em;
+    font-weight: 300;
 }
 
 /* ================================================= */
-/* 3. GALERÍA DE TRABAJOS (CSS GRID) */
+/* 3. CARRUSEL DE LOGOS (CSS Animation) */
 /* ================================================= */
 
-.section-title {
+.clients-section {
+    padding: 40px 0;
+    background-color: var(--color-background-light);
     text-align: center;
-    font-size: 2em;
-    margin-bottom: 30px;
-    color: var(--color-secondary);
+    overflow: hidden; /* Oculta el excedente del carrusel */
+}
+
+.clients-section h3 {
+    font-size: 1.3em;
+    font-weight: 400;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.logo-carousel-track {
+    display: flex;
+    width: 200%; /* El doble de ancho para que haya espacio para el loop */
+    animation: scroll 40s linear infinite;
+}
+
+.logo-carousel-track img {
+    height: 60px; /* Tamaño de los logos */
+    margin: 0 40px;
+    filter: grayscale(100%); /* Logos en escala de grises (profesional) */
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+
+.logo-carousel-track img:hover {
+    filter: none; /* Color al pasar el mouse */
+    opacity: 1;
+}
+
+/* Keyframe de la animación */
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* Se mueve la mitad del track (un set completo de logos) */
+}
+
+/* ================================================= */
+/* 4. GALERÍA DE TRABAJOS (Estilo Limpio) */
+/* ================================================= */
+
+.gallery-section {
+    padding: 80px 20px;
+    max-width: 1300px;
+    margin: 0 auto;
 }
 
 .work-gallery {
     display: grid;
-    /* 3 columnas en escritorio, adaptable */
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-    gap: 15px;
-    max-width: 1200px;
-    margin: 0 auto 50px;
-    padding: 0 15px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
 }
 
 .gallery-item {
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    transition: transform 0.3s ease-in-out;
-}
-
-.gallery-item:hover {
-    transform: scale(1.03); /* Ligero zoom al pasar el ratón */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Sutil elevación */
+    border-radius: 8px;
 }
 
 .gallery-item img {
     width: 100%;
-    height: 250px; /* Altura fija para la consistencia visual */
-    object-fit: cover; /* Asegura que la imagen cubra el área */
-    display: block;
+    height: 350px; 
+    object-fit: cover;
+    transition: transform 0.5s ease;
 }
 
-/* Overlay para el efecto hover (se torna gris transparente y muestra info) */
+.gallery-item:hover img {
+    transform: scale(1.05); /* Zoom suave */
+}
+
+/* Estilo del overlay mejorado */
 .item-overlay {
+    background-color: rgba(255, 153, 0, 0.85); /* Overlay naranja semitransparente */
+    color: var(--color-text-light);
+    /* ... (resto del estilo del overlay) ... */
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* 60% gris/negro transparente */
-    color: var(--color-text-light);
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: 0; /* Inicialmente invisible */
+    opacity: 0; 
     transition: opacity 0.3s ease;
-    padding: 15px;
+    padding: 20px;
     text-align: center;
 }
 
-/* Muestra el overlay al pasar el ratón */
 .gallery-item:hover .item-overlay {
     opacity: 1;
 }
 
 .item-overlay p {
-    font-size: 1.1em;
-    font-weight: bold;
+    font-size: 1.2em;
+    font-weight: 600;
 }
 
+
 /* ================================================= */
-/* 4. BANNER 3D */
+/* 5. BANNER 3D (CTA) */
 /* ================================================= */
 
-.banner-3d {
+.cta-3d-banner {
+    padding: 100px 20px;
     background-color: var(--color-secondary);
     color: var(--color-text-light);
-    padding: 60px 20px;
     text-align: center;
-    margin-bottom: 50px;
-    /* Puedes usar una imagen de fondo para el efecto visual */
-    /* background-image: url('fondo-banner-3d.jpg');
-       background-size: cover;
-       background-position: center; */
 }
 
-.banner-3d h2 {
+.banner-content-wrapper h2 {
     font-size: 3em;
-    text-transform: uppercase;
-    color: var(--color-primary); /* Color de contraste naranja */
+    color: var(--color-primary);
     margin-bottom: 10px;
 }
 
-.banner-3d p {
-    font-size: 1.2em;
+.banner-content-wrapper p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
 }
 
+
 /* ================================================= */
-/* 5. FOOTER Y CONTACTO (CSS FLEXBOX) */
+/* 6. FOOTER Y CONTACTO */
 /* ================================================= */
 
 .main-footer {
-    background-color: var(--color-primary); /* Fondo Naranja/Dorado */
-    padding: 40px 20px 20px;
+    padding: 60px 20px;
+    background-color: var(--color-primary);
     text-align: center;
     color: var(--color-text-light);
 }
 
 .main-footer .section-title {
     color: var(--color-text-light);
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .contact-links {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    margin-bottom: 30px;
+    gap: 30px;
+    margin-bottom: 40px;
 }
 
 .contact-button {
-    display: inline-block;
-    padding: 10px 25px;
+    /* Estilos base */
     background-color: var(--color-text-light);
     color: var(--color-secondary);
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 50px; /* Botones tipo píldora */
+    padding: 12px 30px;
+    font-weight: 600;
 }
+/* ... (Se mantienen estilos hover y copyright) ... */
 
-.contact-button:hover {
-    background-color: #eee;
-    transform: translateY(-2px);
-}
-
-.copyright {
-    font-size: 0.8em;
-    margin-top: 20px;
-    opacity: 0.8;
-}
-
-/* ================================================= */
-/* MEDIA QUERIES (Responsividad) */
-/* ================================================= */
-
-/* Ajustes para pantallas más pequeñas (Móviles) */
+/* Ajustes para móviles */
 @media (max-width: 768px) {
-    .header-pattern-area {
-        height: 60px;
+    .modern-header {
+        flex-direction: column;
+        padding: 15px 20px;
+        position: static;
     }
 
-    .header-content {
-        margin-top: -30px;
+    .main-nav {
+        margin-top: 15px;
     }
 
-    .logo-container h1 {
-        font-size: 1.5em;
-    }
-
-    .banner-3d h2 {
+    .hero-text-content h2 {
         font-size: 2.2em;
     }
 
     .work-gallery {
-        /* Fuerza a que los ítems sean más anchos en móvil */
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-template-columns: 1fr;
     }
 
     .contact-links {
         flex-direction: column;
-        gap: 10px;
+        gap: 15px;
     }
+    
+/* ================================================= */
+/* CONFIGURACIÓN DE FUENTES */
+/* ================================================= */
+
+/* Poppins para la mayoría de los textos (cuerpo, botones, navegación) */
+body {
+    font-family: 'Poppins', sans-serif;
+    /* ... otros estilos ... */
+}
+
+/* Frutiger (o similar) para Títulos y Branding */
+/* USO DE FALLBACKS:
+   Si Frutiger no está cargada (requiere licencia/servicio), 
+   usaremos 'Helvetica Neue' o 'Arial' como fuentes sans-serif limpias.
+*/
+.logo-text h1, 
+.hero-text-content h2, /* Título principal del Hero */
+.section-title /* Títulos de sección */
+{
+    /* ⚠️ Reemplaza 'Frutiger' con el nombre exacto de la fuente BOLD/BLACK de tu licencia */
+    font-family: 'Frutiger', 'Helvetica Neue', Arial, sans-serif; 
+    font-weight: 700; /* Asumiendo que BOLD/BLACK es 700 o superior */
+    letter-spacing: -0.5px; /* Las sans-serif necesitan un ligero ajuste */
+}
+
+/* Logo: la combinación de bold con black */
+.logo-text h1 {
+    font-size: 1.6em; 
+    /* Si el "Black" es el peso más grueso, lo usamos */
+    font-weight: 900; 
+}
+
+/* Subtítulo del logo: mantenemos Poppins o un peso menor de Frutiger si lo tienes */
+.logo-text p {
+    font-family: 'Poppins', sans-serif; 
+    font-size: 0.75em;
+    font-weight: 300;
+}
+
+/* Título principal del Hero: Usamos un peso alto para el impacto */
+.hero-text-content h2 {
+    font-weight: 800; /* Un poco menos pesado que el logo para la lectura */
+    font-size: 3.8em;
+}
+
+/* Títulos de Sección: peso intermedio para claridad */
+.section-title {
+    font-weight: 700;
+}
+
 }
