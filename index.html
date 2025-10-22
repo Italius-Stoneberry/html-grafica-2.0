@@ -1,89 +1,103 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GraficARTE</title>
-  <meta name="description" content="Servicios de gráfica aplicada y grabado láser." />
-  <link rel="stylesheet" href="styles.css" />
-  <style>
-
-
-    body { background-color: #fff; margin:0;}
-    img { max-width: 100%; height: auto; display: block; }
-
-    /* Contenedor fijo y centrado */
-    .contenedor{ width:auto; max-width:100%; margin:0 auto; padding:0 16px; }
-
-    /* HEADER limpio: logo centrado y ondas al 100% */
-    .site-header{ position:relative; background:#fff; overflow:hidden; }
-    .header-centro{ height: 160px; display:flex; align-items:center; justify-content:center; }
-    .logo{ width:auto; height:150px; z-index: 2; }
-    .ondas{ position:absolute ; left:0; right:0; bottom:0; line-height:0; pointer-events:none; z-index: 1; }
-    .ondas img { position: relative; left: 50%; transform: translateX(-50%); 
-        width: 100%; /* ocupa todo el ancho disponible */ 
-        max-width: none; /* importante para que min-width funcione sin tope */
-        min-width: 1400px; /* <-- el límite mínimo que vos definas (ej. 600px) */ 
-        height: auto; display: block; }
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GraficARTE - Diseño y Gráfica Aplicada</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/png" href="img/paginaicono.ico.png"> 
 </head>
 <body>
-  <!-- Encabezado con logo centrado -->
-  <header class="site-header">
-    <div class="contenedor header-centro">
-      <img class="logo" src="img/logo.svg" alt="GraficARTE - Gráfica aplicada" width="360" height="200">
-    </div>
-    <div class="ondas" aria-hidden="true">
-      <img src="img/headwave.svg" alt="" decoding="async">
-    </div>
-  </header>
 
-  <!-- Contenido principal -->
-  <main id="contenido">
-    <nav class="contenedor" aria-label="Navegación principal">
-      <a href="#portfolio">Portfolio</a>
-      <a href="#servicios">Servicios</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-    <section id="hero" aria-label="Presentación">
-      <div class="contenedor">
-        <p>Acá va el banner con la animación más adelante.</p>
-      </div>
+    <header class="main-header">
+        <div class="header-pattern-area"></div>
+        
+        <div class="header-content">
+            <div class="logo-container">
+                <img src="logo.png" alt="GraficARTE Gráfica Aplicada Logo" class="logo">
+                <h1>GraficARTE</h1>
+                <p>GRÁFICA APLICADA</p>
+            </div>
+            <nav class="main-nav">
+                </nav>
+        </div>
+    </header>
+
+    <section class="video-section">
+        <div class="video-responsive">
+            <iframe 
+                src="https://www.youtube.com/embed/VIDEO_ID_DE_YOUTUBE?autoplay=1&mute=1&loop=1&playlist=VIDEO_ID_DE_YOUTUBE" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
     </section>
 
-    <section id="portfolio" aria-label="Trabajos destacados">
-      <div class="contenedor">
-        <h2>Trabajos</h2>
-        <p>Listado o grilla de proyectos.</p>
-      </div>
+    <section class="gallery-section">
+        <h2 class="section-title">Nuestros Trabajos</h2>
+        <div class="work-gallery">
+            <div class="gallery-item">
+                <img src="trabajo-1.jpg" alt="Tarjeta de presentación">
+                <div class="item-overlay">
+                    <p>Diseño y Producción de Tarjetas de Presentación de Lujo.</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="trabajo-2.jpg" alt="Stickers troquelados">
+                <div class="item-overlay">
+                    <p>Producción de Stickers y Etiquetas Troqueladas para productos.</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="trabajo-3.jpg" alt="Vinilo vehicular">
+                <div class="item-overlay">
+                    <p>Rotulación y Vinilado de Flotas Vehiculares Comerciales.</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="trabajo-4.jpg" alt="Pins y Merchandising">
+                <div class="item-overlay">
+                    <p>Diseño y Fabricación de Merchandising: Pins, Llaveros, etc.</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="trabajo-5.jpg" alt="Estampado textil">
+                <div class="item-overlay">
+                    <p>Estampado de Remeras y Textil con Técnicas de Serigrafía.</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="trabajo-6.jpg" alt="Logo corporativo">
+                <div class="item-overlay">
+                    <p>Diseño de Logos y Creación de Identidad Corporativa.</p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="servicios" aria-label="Servicios ofrecidos">
-      <div class="contenedor">
-        <h2>Servicios</h2>
-        <ul>
-          <li>Grabado láser en madera, cuero, vidrio y metales</li>
-          <li>Diseño de archivos para grabado</li>
-        </ul>
-      </div>
+    <section class="banner-3d">
+        <div class="banner-content-wrapper">
+             <h2>IMPRESIONES 3D</h2>
+            <p>Diseño, prototipado y producción con tecnología de impresión 3D.</p>
+        </div>
     </section>
 
-    <section id="contacto" aria-label="Contacto">
-      <div class="contenedor">
-        <h2>Contacto</h2>
-        <p>Email: <a href="mailto:info@graficarte.com">info@graficarte.com</a></p>
-      </div>
-    </section>
-  </main>
+    <footer class="main-footer">
+        <h2 class="section-title">Contacto</h2>
+        <div class="contact-links">
+            <a href="https://wa.me/TUNUMERO" target="_blank" class="contact-button whatsapp">
+                WhatsApp
+            </a>
+            <a href="mailto:TUEMAIL@dominio.com" target="_blank" class="contact-button mail">
+                Mail
+            </a>
+            <a href="https://instagram.com/TUUSUARIO" target="_blank" class="contact-button instagram">
+                Instagram
+            </a>
+        </div>
+        <p class="copyright">&copy; 2024 GraficARTE. Todos los derechos reservados. | Desarrollado con HTML y CSS.</p>
+    </footer>
 
-  <footer>
-    <div class="contenedor">
-      <small>© <span id="anio"></span> · GraficARTE</small>
-    </div>
-  </footer>
-
-  <script>
-    document.getElementById('anio').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
