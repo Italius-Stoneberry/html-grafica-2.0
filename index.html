@@ -481,26 +481,53 @@ footer a:hover{color:var(--gold)}
         accent2: 'rgba(246,168,0,.45)',
         bump: 1.15,          // altura del "pico" del mouse
         bumpR: 170,          // radio del pico
-        dprCap: 1.5,         // tope de resolución interna
+        dprCap: 2.5,         // tope duro de resolución interna
+        pixelBudget: 1.5e6,  // presupuesto de píxeles: define la nitidez según tamaño
         baseEvery: 1,        // recalcular terreno base cada N frames
         interactive: true
       }, opts);
       this.frame = 0;
+      // en pantallas chicas el pico ocuparía media pantalla: se achica
+      if (Math.min(window.innerWidth, window.innerHeight) < 640) this.o.bumpR *= .6;
       this.t = Math.random() * 100;
       this.amp = 0;                          // amplitud actual del pico
       this.mx = -9999; this.my = -9999;      // mouse actual (suavizado)
       this.tx = -9999; this.ty = -9999;      // mouse objetivo
       this.visible = false;
       this.resize();
-      window.addEventListener('resize', () => this.resize());
+      // debounce + solo si cambió el ancho: en móvil el alto "cambia" todo el
+      // tiempo cuando la barra del navegador aparece/desaparece al scrollear
+      this._lastW = window.innerWidth;
+      let rzTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(rzTimer);
+        rzTimer = setTimeout(() => {
+          if (window.innerWidth !== this._lastW){
+            this._lastW = window.innerWidth;
+            this.resize();
+          }
+        }, 150);
+      });
       if (this.o.interactive && !reduceMotion){
         const src = this.host;
-        src.addEventListener('mousemove', e => {
+        const setTarget = (cx, cy) => {
           const r = this.cv.getBoundingClientRect();
-          this.tx = e.clientX - r.left;
-          this.ty = e.clientY - r.top;
-        });
-        src.addEventListener('mouseleave', () => { this.tx = -9999; this.ty = -9999; });
+          this.tx = cx - r.left;
+          this.ty = cy - r.top;
+        };
+        const clearTarget = () => { this.tx = -9999; this.ty = -9999; };
+        // mouse (desktop)
+        src.addEventListener('mousemove', e => setTarget(e.clientX, e.clientY));
+        src.addEventListener('mouseleave', clearTarget);
+        // touch (móvil/tablet): passive para no bloquear el scroll
+        src.addEventListener('touchstart', e => {
+          const t = e.touches[0]; if (t) setTarget(t.clientX, t.clientY);
+        }, {passive: true});
+        src.addEventListener('touchmove', e => {
+          const t = e.touches[0]; if (t) setTarget(t.clientX, t.clientY);
+        }, {passive: true});
+        src.addEventListener('touchend', clearTarget, {passive: true});
+        src.addEventListener('touchcancel', clearTarget, {passive: true});
       }
       const io = new IntersectionObserver(es => {
         es.forEach(e => this.visible = e.isIntersecting);
@@ -509,8 +536,12 @@ footer a:hover{color:var(--gold)}
     }
     resize(){
       const r = this.cv.parentElement.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, this.o.dprCap);
       this.w = Math.max(r.width, 2); this.h = Math.max(r.height, 2);
+      // dpr adaptativo: en un canvas gigante (hero desktop) baja para no
+      // dibujar millones de píxeles; en uno chico (móvil) sube y queda nítido
+      const rawDpr = window.devicePixelRatio || 1;
+      const fitDpr = Math.sqrt(this.o.pixelBudget / (this.w * this.h));
+      const dpr = Math.max(1, Math.min(rawDpr, fitDpr, this.o.dprCap));
       this.cv.width = this.w * dpr; this.cv.height = this.h * dpr;
       this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       this.cols = Math.ceil(this.w / this.o.cell) + 1;
@@ -613,7 +644,7 @@ footer a:hover{color:var(--gold)}
         if (this.mx < -999){ this.mx = this.tx; this.my = this.ty; }
         this.mx += (this.tx - this.mx) * .07;
         this.my += (this.ty - this.my) * .07;
-        this.amp += (this.o.bump - this.amp) * .06;
+        this.amp += (this.o.bump - this.amp) * .1; // sube rápido (tap en móvil)
       } else if (this.mx > -999){
         this.amp *= .92;
         if (this.amp < .01){ this.mx = -9999; this.amp = 0; }
@@ -631,12 +662,13 @@ footer a:hover{color:var(--gold)}
   }
 
   // hero: claro, denso, interactivo
-  // (canvas gigante → resolución interna capada, terreno base a media tasa)
+  // (el dpr adaptativo lo resuelve solo: baja resolución en desktop
+  //  gigante, nitidez completa en móvil; terreno base a media tasa)
   make('topoHero', 'heroSection', {
     cell: 15, levels: 24, scale: .0038,
     line: 'rgba(18,18,18,.075)', bold: 'rgba(18,18,18,.15)',
     accent: 'rgba(211,0,8,.33)', accent2: 'rgba(128,86,0,.4)',
-    dprCap: 1, baseEvery: 2
+    baseEvery: 2
   });
   // banner 3D: oscuro
   make('topo3d', 'banner3dBox', {
