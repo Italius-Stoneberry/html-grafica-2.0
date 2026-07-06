@@ -1,59 +1,708 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>GraficARTE - Gráfica y Diseño Vanguardista</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GraficARTE · Gráfica Aplicada | Luján de Cuyo, Mendoza</title>
+<meta name="description" content="GraficArte: identidad corporativa, cartelería, gráfica vehicular, grabados, regalos empresariales e impresión 3D en Luján de Cuyo, Mendoza.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* DESIGN.md — Atelier Precise (sin el azul primario) */
+  --gold:#F6A800;
+  --gold-bright:#feaf10;
+  --gold-soft:#ffddb0;
+  --gold-deep:#805600;
+  --red:#D30008;
+  --red-bright:#ff4737;
+  --red-deep:#520001;
+  --ink:#121212;
+  --ink-soft:#1c1b1b;
+  --text-muted:#42474c;
+  --paper:#FFFEF8;
+  --surface:#fcf9f8;
+  --surface-low:#f6f3f2;
+  --surface-high:#ebe7e7;
+  --outline:#c2c7cd;
+  --line:#e5e2e1;
+  --r-sm:4px;
+  --r-lg:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--paper);
+  color:var(--ink-soft);
+  line-height:1.6;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:'Hanken Grotesk',sans-serif;line-height:1.2;letter-spacing:-.02em;color:var(--ink)}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:0 64px}
+.label{
+  font-size:12px;font-weight:600;line-height:1;letter-spacing:.1em;
+  text-transform:uppercase;
+}
 
+/* ---------- header ---------- */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,254,248,.92);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;height:76px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{
+  width:34px;height:34px;border-radius:var(--r-sm);flex:none;
+  background:var(--red);
+  position:relative;overflow:hidden;
+}
+.brand-mark::after{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 30% 70%, transparent 6px, rgba(255,255,255,.4) 6.8px, transparent 7.6px),
+    radial-gradient(circle at 30% 70%, transparent 11px, rgba(255,255,255,.34) 11.8px, transparent 12.6px),
+    radial-gradient(circle at 30% 70%, transparent 16px, rgba(255,255,255,.28) 16.8px, transparent 17.6px),
+    radial-gradient(circle at 30% 70%, transparent 21px, rgba(255,255,255,.22) 21.8px, transparent 22.6px);
+}
+.brand h1{font-size:1.15rem;font-weight:800;letter-spacing:-.03em}
+.brand h1 span{color:var(--red)}
+.brand small{display:block;font-family:'Inter',sans-serif;font-size:.58rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted)}
+nav.links{display:flex;align-items:center;gap:36px;font-size:.92rem;font-weight:500}
+nav.links a{color:var(--text-muted);transition:color .2s}
+nav.links a:hover{color:var(--ink)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:12px 26px;border-radius:var(--r-sm);font-weight:600;font-size:.92rem;
+  transition:background .2s, color .2s, border-color .2s, box-shadow .25s;
+  border:none;cursor:pointer;font-family:'Inter',sans-serif;
+}
+.btn-gold{background:var(--gold);color:var(--ink)}
+.btn-gold:hover{background:var(--gold-bright);box-shadow:0 10px 30px -8px rgba(246,168,0,.55)}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-dark:hover{background:#000;box-shadow:0 10px 30px -8px rgba(18,18,18,.45)}
+.btn-ghost{border:1px solid var(--ink);color:var(--ink);background:transparent}
+.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+.menu-btn{display:none;background:none;border:none;cursor:pointer;padding:6px}
+.menu-btn svg{display:block}
+
+/* ---------- topo canvas ---------- */
+.topo-holder{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.topo-holder canvas{width:100%;height:100%;display:block}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;padding:130px 0 150px;background:var(--surface)}
+.hero-inner{position:relative;max-width:760px;z-index:2}
+.chip{
+  display:inline-flex;align-items:center;gap:8px;
+  color:var(--gold-deep);
+  border:1px solid var(--line);background:var(--paper);
+  padding:8px 16px;border-radius:var(--r-sm);margin-bottom:32px;
+}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red)}
+.hero h2{
+  font-size:clamp(2.5rem,5.6vw,4.5rem);font-weight:800;
+  letter-spacing:-.04em;line-height:1.1;margin-bottom:24px;
+}
+.hero h2 em{font-style:normal;color:var(--red)}
+.hero p{font-size:1.125rem;color:var(--text-muted);max-width:540px;margin-bottom:42px;font-weight:300}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+
+/* ---------- secciones ---------- */
+.section{padding:120px 0}
+.sec-head{max-width:580px;margin-bottom:64px}
+.kicker{composes:label}
+.kicker{
+  font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--gold-deep);margin-bottom:16px;display:flex;align-items:center;gap:10px;
+}
+.kicker::before{content:"";width:26px;height:1px;background:var(--red)}
+.sec-head h2{font-size:clamp(2rem,3.6vw,3rem);font-weight:700}
+.sec-head p{color:var(--text-muted);margin-top:16px;font-weight:300;font-size:1.05rem}
+
+/* ---------- servicios ---------- */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.card{
+  background:var(--surface-low);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:36px 32px;position:relative;
+  transition:border-color .25s, background .25s;
+}
+.card::before{
+  content:"";position:absolute;top:-1px;left:-1px;right:-1px;height:3px;
+  background:var(--gold);border-radius:var(--r-lg) var(--r-lg) 0 0;
+  opacity:0;transition:opacity .25s;
+}
+.card:hover{border-color:var(--outline);background:var(--paper)}
+.card:hover::before{opacity:1}
+.card .icon{
+  width:46px;height:46px;border-radius:var(--r-sm);margin-bottom:22px;
+  background:rgba(246,168,0,.14);
+  display:flex;align-items:center;justify-content:center;color:var(--ink);
+}
+.card h3{font-size:1.25rem;font-weight:600;margin-bottom:10px}
+.card p{font-size:.92rem;color:var(--text-muted);font-weight:300}
+
+/* ---------- banner 3D ---------- */
+.banner3d{position:relative;overflow:hidden;background:var(--ink);color:#fff;border-radius:var(--r-lg)}
+.banner3d-inner{position:relative;padding:80px 64px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;z-index:2}
+.banner3d .kicker{color:var(--gold)}
+.banner3d .kicker::before{background:var(--gold)}
+.banner3d h2{font-size:clamp(1.8rem,3.2vw,2.6rem);font-weight:700;margin-bottom:14px;color:#fff}
+.banner3d h2 span{color:var(--gold)}
+.banner3d p{color:rgba(255,255,255,.6);max-width:460px;font-weight:300}
+
+/* ---------- nosotros ---------- */
+.about{display:grid;grid-template-columns:1.05fr .95fr;gap:80px;align-items:center}
+.about-visual{
+  position:relative;border-radius:var(--r-lg);overflow:hidden;
+  background:var(--surface-low);border:1px solid var(--line);
+  min-height:400px;
+}
+.about h2{font-size:clamp(2rem,3.4vw,2.8rem);font-weight:700;margin-bottom:20px}
+.about>div>p{color:var(--text-muted);margin-bottom:16px;font-weight:300;font-size:1.02rem}
+.about-points{margin-top:32px;display:grid;gap:16px}
+.point{display:flex;gap:16px;align-items:flex-start;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.point:last-child{border-bottom:none;padding-bottom:0}
+.point .dot{
+  flex:none;width:28px;height:28px;border-radius:var(--r-sm);margin-top:2px;
+  background:var(--ink);color:var(--gold);
+  display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;
+}
+.point b{display:block;font-weight:600;font-size:.98rem;font-family:'Hanken Grotesk',sans-serif;color:var(--ink)}
+.point span{font-size:.88rem;color:var(--text-muted);font-weight:300}
+
+/* ---------- contacto ---------- */
+.contact{background:var(--surface-low);border-top:1px solid var(--line)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.c-item{display:flex;gap:16px;padding:20px 0;border-bottom:1px solid var(--line)}
+.c-item:last-child{border-bottom:none}
+.c-item .icon{
+  flex:none;width:42px;height:42px;border-radius:var(--r-sm);
+  background:var(--paper);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;color:var(--red);
+}
+.c-item b{display:block;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:4px}
+.c-item a,.c-item span{font-size:1rem;font-weight:500;color:var(--ink)}
+.c-item a:hover{color:var(--red)}
+.contact-card{
+  background:var(--ink);color:#fff;border-radius:var(--r-lg);padding:52px 46px;
+  position:relative;overflow:hidden;
+}
+.contact-card>*{position:relative;z-index:2}
+.contact-card h3{font-size:1.6rem;font-weight:700;margin-bottom:12px;color:#fff}
+.contact-card p{color:rgba(255,255,255,.6);margin-bottom:30px;font-weight:300;font-size:.95rem}
+.contact-card .btn{width:100%;margin-bottom:12px}
+.contact-card .btn-alt{border:1px solid rgba(255,255,255,.28);color:#fff;background:transparent}
+.contact-card .btn-alt:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ---------- footer ---------- */
+footer{background:var(--ink);color:rgba(255,255,255,.45);padding:32px 0;font-size:.83rem}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+footer a{color:rgba(255,255,255,.72)}
+footer a:hover{color:var(--gold)}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease}
+.reveal.on{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+}
+
+/* ---------- responsive ---------- */
+@media (max-width:1024px){
+  .wrap{padding:0 40px}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .about{grid-template-columns:1fr;gap:48px}
+  .contact-grid{grid-template-columns:1fr;gap:48px}
+  .banner3d-inner{padding:56px 40px}
+}
+@media (max-width:640px){
+  .wrap{padding:0 20px}
+  nav.links{
+    display:none;position:absolute;top:76px;left:0;right:0;
+    background:var(--paper);border-bottom:1px solid var(--line);
+    flex-direction:column;gap:0;padding:10px 20px 20px;
+  }
+  nav.links.open{display:flex}
+  nav.links a{padding:12px 0;width:100%}
+  .menu-btn{display:block}
+  .grid{grid-template-columns:1fr}
+  .hero{padding:80px 0 100px}
+  .section{padding:80px 0}
+  .hero h2{font-size:2rem}
+}
+</style>
+</head>
 <body>
 
-    <header class="modern-header">
-        <div class="logo-container">
-            <img src="img/logo.png" alt="GraficARTE Logo" class="logo">
-            <div class="logo-text">
-                <h1>GraficARTE</h1>
-                <p>GRÁFICA APLICADA Y SOLUCIONES 3D</p>
-            </div>
-        </div>
-        <nav class="main-nav">
-            <a href="#galeria">Trabajos</a>
-            <a href="#clientes">Clientes</a>
-            <a href="#contacto" class="btn-contact-header">Contacto</a>
-        </nav>
-    </header>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#">
+      <span class="brand-mark"></span>
+      <span>
+        <h1>Grafic<span>ARTE</span></h1>
+        <small>Gráfica aplicada · Mendoza</small>
+      </span>
+    </a>
+    <nav class="links" id="navLinks">
+      <a href="#servicios">Servicios</a>
+      <a href="#impresion3d">Impresión 3D</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#contacto" class="btn btn-gold" style="padding:10px 22px">Contacto</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Menú">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#121212" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
 
-    <section class="hero-video-section">
-        <div class="video-overlay"></div>
-        <div class="video-responsive">
-            <iframe 
-                src="https://www.youtube.com/embed/VIDEO_ID_DE_YOUTUBE?controls=0&autoplay=1&mute=1&loop=1&playlist=VIDEO_ID_DE_YOUTUBE" 
-                frameborder="0" 
-                allow="autoplay; encrypted-media; gyroscope;" 
-                allowfullscreen>
-            </iframe>
-        </div>
-        <div class="hero-text-content">
-            <h2>Transformamos Ideas en Impacto Visual</h2>
-            <p>Especialistas en gráfica aplicada, branding y prototipado 3D para potenciar tu marca.</p>
-            <a href="#contacto" class="btn-primary">Empezá tu Proyecto</a>
-        </div>
-    </section>
+<!-- ============ HERO ============ -->
+<section class="hero" id="heroSection">
+  <div class="topo-holder"><canvas id="topoHero"></canvas></div>
+  <div class="wrap hero-inner">
+    <span class="chip label">Luján de Cuyo · Mendoza</span>
+    <h2>Soluciones gráficas que <em>dejan marca</em></h2>
+    <p>Identidad corporativa, cartelería, gráfica vehicular, grabados e impresión 3D. Del diseño a la producción, todo en un solo lugar.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-gold" href="https://wa.me/5492615080380" target="_blank" rel="noopener">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.2c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4l.9 2.1c.1.2.1.4 0 .6l-.4.6c-.1.2-.3.4-.1.7.2.3.8 1.4 1.8 2.2 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2.1 1c.3.1.5.2.5.3.1.2.1.7-.1 1.1z"/></svg>
+        Escribinos por WhatsApp
+      </a>
+      <a class="btn btn-ghost" href="#servicios">Ver servicios</a>
+    </div>
+  </div>
+</section>
 
-    <section class="clients-section" id="clientes">
-        <h3>Confían en nuestro trabajo</h3>
-        <div class="logo-carousel-track">
-            <img src="img/logo-cliente-1.png" alt="Logo Cliente 1">
-            <img src="img/logo-cliente-2.png" alt="Logo Cliente 2">
-            <img src="img/logo-cliente-3.png" alt="Logo Cliente 3">
-            <img src="img/logo-cliente-4.png" alt="Logo Cliente 4">
-            <img src="img/logo-cliente-5.png" alt="Logo Cliente 5">
-            <img src="img/logo-cliente-1.png" alt="Logo Cliente 1">
-            <img src="img/logo-cliente-2.png" alt="Logo Cliente 2">
-            <img src="img/logo-cliente-3.png" alt="Logo Cliente 3">
-            </div>
-    </section>
+<!-- ============ SERVICIOS ============ -->
+<section class="section" id="servicios">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Qué hacemos</div>
+      <h2>Servicios pensados para tu marca</h2>
+      <p>Cada trabajo se produce con materiales de calidad y terminación profesional.</p>
+    </div>
+    <div class="grid">
+      <div class="card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 14.5c1-2.5 2.2-6 4-6s3 3.5 4 6M9.2 12h5.6"/></svg></div>
+        <h3>Identidad Corporativa</h3>
+        <p>Logos, papelería y sistemas gráficos coherentes para que tu marca se reconozca en todos lados.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7-3-3-7 7v3h3z"/><path d="M18 13l-3-3 2-2a2.1 2.1 0 0 1 3 3l-2 2z"/><path d="M4 21h6"/></svg></div>
+        <h3>Grabados</h3>
+        <p>Grabado láser sobre madera, metal, acrílico y más. Precisión y detalle en cada pieza.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9"/><path d="M2 7h20v5H2z"/><path d="M12 21V7"/><path d="M12 7c-1.5 0-4-1-4-3a2 2 0 0 1 4 0c0-1.1.9-2 2-2a2 2 0 0 1 2 2c0 2-2.5 3-4 3z"/></svg></div>
+        <h3>Regalos Empresariales</h3>
+        <p>Merchandising y regalos personalizados que fortalecen la relación con tus clientes y tu equipo.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h6M7 14h4"/></svg></div>
+        <h3>Tarjetas Personales</h3>
+        <p>Tarjetas con diseño e impresión de calidad: la primera impresión de tu negocio, bien hecha.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="11" rx="2"/><path d="M12 14v7M8 21h8"/></svg></div>
+        <h3>Cartelería</h3>
+        <p>Carteles, banners y señalética para interior y exterior. Tu local, visible desde lejos.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15l2-6a2 2 0 0 1 2-1.3h10a2 2 0 0 1 2 1.3l2 6"/><path d="M2 15h20v3a1 1 0 0 1-1 1h-1.5"/><path d="M4.5 19H3a1 1 0 0 1-1-1v-3"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/><path d="M9 19h6"/></svg></div>
+        <h3>Gráfica Vehicular</h3>
+        <p>Ploteo y rotulación de vehículos: convertí tu movilidad en publicidad que trabaja todo el día.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section class="gallery-section" id="galeria">
-        <h2 class="section-title">Portafolio Destacado</h2>
-        <div class="work-gallery">
+<!-- ============ BANNER 3D ============ -->
+<section class="section" id="impresion3d" style="padding-top:0">
+  <div class="wrap">
+    <div class="banner3d reveal" id="banner3dBox">
+      <div class="topo-holder"><canvas id="topo3d"></canvas></div>
+      <div class="banner3d-inner">
+        <div>
+          <div class="kicker">GraficArte 3D</div>
+          <h2>Prototipado e <span>impresión 3D</span></h2>
+          <p>Piezas funcionales, prototipos y objetos personalizados. Mirá los trabajos en nuestro Instagram dedicado.</p>
+        </div>
+        <a class="btn btn-gold" href="https://www.instagram.com/graficartemdz_3d/" target="_blank" rel="noopener">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg>
+          Ver @graficartemdz_3d
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NOSOTROS ============ -->
+<section class="section" id="nosotros" style="padding-top:0">
+  <div class="wrap about">
+    <div class="reveal">
+      <div class="kicker">Nosotros</div>
+      <h2>Un taller gráfico, todas las soluciones</h2>
+      <p>Somos GraficArte, un taller de gráfica aplicada en Luján de Cuyo. Acompañamos a comercios, empresas y emprendedores de Mendoza en todo el proceso: desde la idea y el diseño hasta la producción y la entrega.</p>
+      <div class="about-points">
+        <div class="point">
+          <span class="dot">01</span>
+          <div><b>Diseño y producción integrados</b><span>No tenés que coordinar entre diseñador e imprenta: lo resolvemos todo acá.</span></div>
+        </div>
+        <div class="point">
+          <span class="dot">02</span>
+          <div><b>Atención directa y personalizada</b><span>Hablás con quien hace tu trabajo. Presupuestos claros y tiempos reales.</span></div>
+        </div>
+        <div class="point">
+          <span class="dot">03</span>
+          <div><b>Tecnología de impresión y corte</b><span>Impresión, grabado láser y 3D para materializar cualquier idea.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual reveal" aria-hidden="true">
+      <div class="topo-holder"><canvas id="topoAbout"></canvas></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section class="section contact" id="contacto">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Contacto</div>
+      <h2>Empezá tu proyecto hoy</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="c-item">
+          <div class="icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+          <div>
+            <b>Dirección</b>
+            <a href="https://www.google.com.ar/maps/place/Gr%C3%A1ficarte+Soluciones+Graficas/@-32.9980696,-68.8695418,18z" target="_blank" rel="noopener">Rizzo 171, Luján de Cuyo, Mendoza</a>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <div>
+            <b>Horarios</b>
+            <span>Lunes a viernes · 8:30 a 18:30 corrido</span>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6L22 7"/></svg></div>
+          <div>
+            <b>Email</b>
+            <a href="mailto:graficartemdz@gmail.com?subject=Contacto%20v%C3%ADa%20web">graficartemdz@gmail.com</a>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></div>
+          <div>
+            <b>Instagram</b>
+            <a href="https://www.instagram.com/graficartemdz/" target="_blank" rel="noopener">@graficartemdz</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-card reveal" id="contactCardBox">
+        <div class="topo-holder"><canvas id="topoContact"></canvas></div>
+        <h3>¿Tenés algo en mente?</h3>
+        <p>Contanos qué necesitás y te pasamos un presupuesto sin compromiso. Respondemos rápido por WhatsApp.</p>
+        <a class="btn btn-gold" href="https://wa.me/5492615080380" target="_blank" rel="noopener">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.2c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4l.9 2.1c.1.2.1.4 0 .6l-.4.6c-.1.2-.3.4-.1.7.2.3.8 1.4 1.8 2.2 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2.1 1c.3.1.5.2.5.3.1.2.1.7-.1 1.1z"/></svg>
+          WhatsApp: 261 508-0380
+        </a>
+        <a class="btn btn-alt" href="https://wa.me/5492616828285" target="_blank" rel="noopener">
+          WhatsApp alternativo: 261 682-8285
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 GraficArte · Luján de Cuyo, Mendoza</span>
+    <span>
+      <a href="https://www.instagram.com/graficartemdz/" target="_blank" rel="noopener">Instagram</a> ·
+      <a href="https://www.instagram.com/graficartemdz_3d/" target="_blank" rel="noopener">Instagram 3D</a> ·
+      <a href="mailto:graficartemdz@gmail.com">Email</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   TOPOGRAFÍA INTERACTIVA — campo de ruido + marching squares
+   Curvas de nivel densas que fluyen y reaccionan al mouse.
+============================================================ */
+(function(){
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- ruido de valor (fbm) ----
+  function hash(ix, iy){
+    let n = Math.sin(ix * 127.1 + iy * 311.7) * 43758.5453;
+    return n - Math.floor(n);
+  }
+  function smooth(t){ return t * t * (3 - 2 * t); }
+  function vnoise(x, y){
+    const ix = Math.floor(x), iy = Math.floor(y);
+    const fx = x - ix, fy = y - iy;
+    const a = hash(ix, iy), b = hash(ix + 1, iy);
+    const c = hash(ix, iy + 1), d = hash(ix + 1, iy + 1);
+    const ux = smooth(fx), uy = smooth(fy);
+    return a + (b - a) * ux + (c - a) * uy + (a - b - c + d) * ux * uy;
+  }
+  function fbm(x, y){
+    let v = 0, amp = .55, f = 1;
+    for (let o = 0; o < 3; o++){
+      v += amp * vnoise(x * f, y * f);
+      amp *= .5; f *= 2.1;
+    }
+    return (v - .48) * 2.2; // ~[-1.1, 1.1]
+  }
+
+  class Topo {
+    constructor(canvas, hostForMouse, opts){
+      this.cv = canvas;
+      this.ctx = canvas.getContext('2d');
+      this.host = hostForMouse;
+      this.o = Object.assign({
+        cell: 14,            // densidad de la grilla (px)
+        levels: 26,          // cantidad de curvas de nivel
+        scale: .0042,        // zoom del terreno
+        speed: .045,         // velocidad del flujo
+        line: 'rgba(18,18,18,.08)',
+        bold: 'rgba(18,18,18,.16)',
+        accent: 'rgba(211,0,8,.35)',
+        accent2: 'rgba(246,168,0,.45)',
+        bump: 1.15,          // altura del "pico" del mouse
+        bumpR: 170,          // radio del pico
+        dprCap: 1.5,         // tope de resolución interna
+        baseEvery: 1,        // recalcular terreno base cada N frames
+        interactive: true
+      }, opts);
+      this.frame = 0;
+      this.t = Math.random() * 100;
+      this.amp = 0;                          // amplitud actual del pico
+      this.mx = -9999; this.my = -9999;      // mouse actual (suavizado)
+      this.tx = -9999; this.ty = -9999;      // mouse objetivo
+      this.visible = false;
+      this.resize();
+      window.addEventListener('resize', () => this.resize());
+      if (this.o.interactive && !reduceMotion){
+        const src = this.host;
+        src.addEventListener('mousemove', e => {
+          const r = this.cv.getBoundingClientRect();
+          this.tx = e.clientX - r.left;
+          this.ty = e.clientY - r.top;
+        });
+        src.addEventListener('mouseleave', () => { this.tx = -9999; this.ty = -9999; });
+      }
+      const io = new IntersectionObserver(es => {
+        es.forEach(e => this.visible = e.isIntersecting);
+      }, {threshold: .02});
+      io.observe(this.cv);
+    }
+    resize(){
+      const r = this.cv.parentElement.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, this.o.dprCap);
+      this.w = Math.max(r.width, 2); this.h = Math.max(r.height, 2);
+      this.cv.width = this.w * dpr; this.cv.height = this.h * dpr;
+      this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      this.cols = Math.ceil(this.w / this.o.cell) + 1;
+      this.rows = Math.ceil(this.h / this.o.cell) + 1;
+      this.bVals = new Float32Array(this.cols * this.rows); // terreno base (cacheado)
+      this.vals = new Float32Array(this.cols * this.rows);  // terreno + pico del mouse
+      this.sampleBase();
+      this.drawFrame(); // primer render inmediato
+    }
+    // muestrea SOLO el terreno base (la parte cara: ruido fbm).
+    // Se cachea y se recalcula cada `baseEvery` frames.
+    sampleBase(){
+      const {cols, rows, bVals} = this;
+      const cell = this.o.cell, s = this.o.scale;
+      const tx = this.t * .13, ty = this.t * .09;
+      for (let j = 0; j < rows; j++){
+        const py = j * cell * s + ty;
+        for (let i = 0; i < cols; i++){
+          bVals[j * cols + i] = fbm(i * cell * s + tx, py);
+        }
+      }
+    }
+    drawFrame(){
+      const {ctx, cols, rows, vals, bVals} = this;
+      const cell = this.o.cell;
+      // base cacheada + pico del mouse solo en las celdas cercanas (barato)
+      vals.set(bVals);
+      if (this.mx > -999 && this.amp > .01){
+        const r = this.o.bumpR, r2 = r * r, reach = r * 2.5;
+        const i0 = Math.max(0, Math.floor((this.mx - reach) / cell));
+        const i1 = Math.min(cols - 1, Math.ceil((this.mx + reach) / cell));
+        const j0 = Math.max(0, Math.floor((this.my - reach) / cell));
+        const j1 = Math.min(rows - 1, Math.ceil((this.my + reach) / cell));
+        for (let j = j0; j <= j1; j++){
+          const dy = j * cell - this.my;
+          for (let i = i0; i <= i1; i++){
+            const dx = i * cell - this.mx;
+            vals[j * cols + i] += this.amp * Math.exp(-(dx * dx + dy * dy) / r2);
+          }
+        }
+      }
+      ctx.clearRect(0, 0, this.w, this.h);
+      const n = this.o.levels;
+      const lo = -1.05, hi = 1.55;
+      for (let li = 0; li < n; li++){
+        const lv = lo + (hi - lo) * li / (n - 1);
+        let style = this.o.line;
+        if (li % 5 === 0) style = this.o.bold;
+        if (li === Math.floor(n * .42)) style = this.o.accent;
+        if (li === Math.floor(n * .72)) style = this.o.accent2;
+        ctx.strokeStyle = style;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        this.marchLevel(lv, cell);
+        ctx.stroke();
+      }
+    }
+    // marching squares: agrega segmentos del nivel lv al path actual
+    marchLevel(lv, cell){
+      const {ctx, cols, rows, vals} = this;
+      const lerp = (a, b) => (lv - a) / (b - a);
+      for (let j = 0; j < rows - 1; j++){
+        const y0 = j * cell, y1 = y0 + cell;
+        for (let i = 0; i < cols - 1; i++){
+          const x0 = i * cell, x1 = x0 + cell;
+          const tl = vals[j * cols + i],       tr = vals[j * cols + i + 1];
+          const bl = vals[(j + 1) * cols + i], br = vals[(j + 1) * cols + i + 1];
+          let c = 0;
+          if (tl > lv) c |= 8; if (tr > lv) c |= 4;
+          if (br > lv) c |= 2; if (bl > lv) c |= 1;
+          if (c === 0 || c === 15) continue;
+          // puntos de interpolación en cada borde
+          const T = [x0 + cell * lerp(tl, tr), y0];
+          const R = [x1, y0 + cell * lerp(tr, br)];
+          const B = [x0 + cell * lerp(bl, br), y1];
+          const L = [x0, y0 + cell * lerp(tl, bl)];
+          const seg = (p, q) => { ctx.moveTo(p[0], p[1]); ctx.lineTo(q[0], q[1]); };
+          switch (c){
+            case 1: case 14: seg(L, B); break;
+            case 2: case 13: seg(B, R); break;
+            case 3: case 12: seg(L, R); break;
+            case 4: case 11: seg(T, R); break;
+            case 5:          seg(L, T); seg(B, R); break;
+            case 6: case 9:  seg(T, B); break;
+            case 7: case 8:  seg(L, T); break;
+            case 10:         seg(T, R); seg(L, B); break;
+          }
+        }
+      }
+    }
+    tick(dt){
+      if (!this.visible) return;
+      this.frame++;
+      this.t += this.o.speed * dt;
+      // el terreno base (caro) se recalcula cada N frames;
+      // el pico del mouse (barato) se aplica en todos → 60fps percibidos
+      if (this.frame % this.o.baseEvery === 0) this.sampleBase();
+      // suavizado del mouse: el pico crece al entrar y se desvanece al salir
+      if (this.tx > -999){
+        if (this.mx < -999){ this.mx = this.tx; this.my = this.ty; }
+        this.mx += (this.tx - this.mx) * .07;
+        this.my += (this.ty - this.my) * .07;
+        this.amp += (this.o.bump - this.amp) * .06;
+      } else if (this.mx > -999){
+        this.amp *= .92;
+        if (this.amp < .01){ this.mx = -9999; this.amp = 0; }
+      }
+      this.drawFrame();
+    }
+  }
+
+  const instances = [];
+  function make(id, hostId, opts){
+    const cv = document.getElementById(id);
+    if (!cv) return;
+    const host = document.getElementById(hostId) || cv.parentElement.parentElement;
+    instances.push(new Topo(cv, host, opts));
+  }
+
+  // hero: claro, denso, interactivo
+  // (canvas gigante → resolución interna capada, terreno base a media tasa)
+  make('topoHero', 'heroSection', {
+    cell: 15, levels: 24, scale: .0038,
+    line: 'rgba(18,18,18,.075)', bold: 'rgba(18,18,18,.15)',
+    accent: 'rgba(211,0,8,.33)', accent2: 'rgba(128,86,0,.4)',
+    dprCap: 1, baseEvery: 2
+  });
+  // banner 3D: oscuro
+  make('topo3d', 'banner3dBox', {
+    cell: 13, levels: 26, scale: .005,
+    line: 'rgba(255,255,255,.07)', bold: 'rgba(255,255,255,.13)',
+    accent: 'rgba(246,168,0,.4)', accent2: 'rgba(255,71,55,.3)',
+    bumpR: 130
+  });
+  // nosotros: claro, más denso (visual principal de la sección)
+  make('topoAbout', 'topoAbout', {
+    cell: 11, levels: 34, scale: .006,
+    line: 'rgba(18,18,18,.09)', bold: 'rgba(18,18,18,.18)',
+    accent: 'rgba(211,0,8,.4)', accent2: 'rgba(246,168,0,.55)',
+    bumpR: 110
+  });
+  // tarjeta contacto: oscuro
+  make('topoContact', 'contactCardBox', {
+    cell: 12, levels: 24, scale: .006,
+    line: 'rgba(255,255,255,.06)', bold: 'rgba(255,255,255,.12)',
+    accent: 'rgba(246,168,0,.38)', accent2: 'rgba(255,71,55,.28)',
+    bumpR: 110
+  });
+
+  // hosts con pointer-events: los canvas no capturan, escuchamos en la sección
+  const aboutVisual = document.getElementById('topoAbout');
+  if (aboutVisual) aboutVisual.parentElement.style.pointerEvents = 'auto';
+
+  if (!reduceMotion){
+    let last = performance.now();
+    let slowCount = 0;
+    function loop(now){
+      const raw = now - last;
+      const dt = Math.min(raw / 1000, .05) * 60;
+      last = now;
+      if (!document.hidden) instances.forEach(t => t.tick(dt / 60));
+      // degradado automático: si el equipo no llega a ~40fps sostenidos,
+      // se baja la calidad de las instancias visibles hasta que fluya
+      if (raw > 25) slowCount++; else slowCount = Math.max(0, slowCount - 2);
+      if (slowCount > 45){
+        slowCount = 0;
+        instances.forEach(t => {
+          if (t.visible && t.o.cell < 22){
+            t.o.cell += 3;
+            t.o.levels = Math.max(16, t.o.levels - 3);
+            t.resize();
+          }
+        });
+      }
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  }
+})();
+
+// menú mobile
+const btn = document.getElementById('menuBtn');
+const links = document.getElementById('navLinks');
+btn.addEventListener('click', () => links.classList.toggle('open'));
+links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+// reveal on scroll
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
+}, { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
