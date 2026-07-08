@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GraficARTE · Gráfica Aplicada | Luján de Cuyo, Mendoza</title>
 <meta name="description" content="GraficArte: identidad corporativa, cartelería, gráfica vehicular, grabados, regalos empresariales e impresión 3D en Luján de Cuyo, Mendoza.">
+<link rel="icon" type="image/svg+xml" href="favicon rojo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -56,23 +57,10 @@ header{
   border-bottom:1px solid var(--line);
 }
 .nav{display:flex;align-items:center;justify-content:space-between;height:76px}
-.brand{display:flex;align-items:center;gap:12px}
-.brand-mark{
-  width:34px;height:34px;border-radius:var(--r-sm);flex:none;
-  background:var(--red);
-  position:relative;overflow:hidden;
-}
-.brand-mark::after{
-  content:"";position:absolute;inset:0;
-  background:
-    radial-gradient(circle at 30% 70%, transparent 6px, rgba(255,255,255,.4) 6.8px, transparent 7.6px),
-    radial-gradient(circle at 30% 70%, transparent 11px, rgba(255,255,255,.34) 11.8px, transparent 12.6px),
-    radial-gradient(circle at 30% 70%, transparent 16px, rgba(255,255,255,.28) 16.8px, transparent 17.6px),
-    radial-gradient(circle at 30% 70%, transparent 21px, rgba(255,255,255,.22) 21.8px, transparent 22.6px);
-}
-.brand h1{font-size:1.15rem;font-weight:800;letter-spacing:-.03em}
-.brand h1 span{color:var(--red)}
-.brand small{display:block;font-family:'Inter',sans-serif;font-size:.58rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted)}
+.brand{display:flex;align-items:center}
+.brand-logo{height:44px;width:auto;display:block}
+/* el header sticky (76px) tapa el inicio de las secciones al navegar con anchors */
+#servicios,#impresion3d,#nosotros,#contacto{scroll-margin-top:92px}
 nav.links{display:flex;align-items:center;gap:36px;font-size:.92rem;font-weight:500}
 nav.links a{color:var(--text-muted);transition:color .2s}
 nav.links a:hover{color:var(--ink)}
@@ -176,6 +164,38 @@ nav.links a:hover{color:var(--ink)}
 .point b{display:block;font-weight:600;font-size:.98rem;font-family:'Hanken Grotesk',sans-serif;color:var(--ink)}
 .point span{font-size:.88rem;color:var(--text-muted);font-weight:300}
 
+/* ---------- carrusel de marcas (Nosotros) ---------- */
+.clients{margin-top:110px}
+.clients-title{
+  text-align:center;color:var(--text-muted);margin-bottom:34px;
+  font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+}
+.marquee{
+  overflow:hidden;position:relative;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:30px 0;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+}
+.marquee-track{display:flex;width:max-content;animation:marquee var(--marquee-dur,36s) linear infinite}
+.marquee-set{display:flex;align-items:center;gap:80px;padding-right:80px}
+.marquee-set img{
+  height:42px;width:auto;flex:none;
+  filter:grayscale(1);opacity:.55;
+  transition:filter .25s, opacity .25s;
+}
+.marquee-set img:hover{filter:none;opacity:1}
+.marquee:hover .marquee-track{animation-play-state:paused}
+@keyframes marquee{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){
+  .marquee-track{animation:none}
+}
+@media (max-width:640px){
+  .marquee-set{gap:48px;padding-right:48px}
+  .marquee-set img{height:34px}
+  .clients{margin-top:70px}
+}
+
 /* ---------- contacto ---------- */
 .contact{background:var(--surface-low);border-top:1px solid var(--line)}
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
@@ -243,11 +263,7 @@ footer a:hover{color:var(--gold)}
 <header>
   <div class="wrap nav">
     <a class="brand" href="#">
-      <span class="brand-mark"></span>
-      <span>
-        <h1>Grafic<span>ARTE</span></h1>
-        <small>Gráfica aplicada · Mendoza</small>
-      </span>
+      <img class="brand-logo" src="Logo negro completo.svg" alt="GraficArte — Gráfica Aplicada">
     </a>
     <nav class="links" id="navLinks">
       <a href="#servicios">Servicios</a>
@@ -367,6 +383,12 @@ footer a:hover{color:var(--gold)}
       <div class="topo-holder"><canvas id="topoAbout"></canvas></div>
     </div>
   </div>
+  <div class="wrap clients reveal">
+    <div class="clients-title">Confían en nosotros</div>
+    <div class="marquee">
+      <div class="marquee-track" id="marqueeTrack"></div>
+    </div>
+  </div>
 </section>
 
 <!-- ============ CONTACTO ============ -->
@@ -425,6 +447,7 @@ footer a:hover{color:var(--gold)}
 
 <footer>
   <div class="wrap">
+    <img src="Logo blanco completo.svg" alt="GraficArte" style="height:34px;width:auto;opacity:.85">
     <span>© 2026 GraficArte · Luján de Cuyo, Mendoza</span>
     <span>
       <a href="https://www.instagram.com/graficartemdz/" target="_blank" rel="noopener">Instagram</a> ·
@@ -721,6 +744,38 @@ footer a:hover{color:var(--gold)}
     }
     requestAnimationFrame(loop);
   }
+})();
+
+/* ============================================================
+   CARRUSEL DE MARCAS — para agregar una empresa:
+   1. guardá el SVG (versión oscura) en la carpeta marcas/
+   2. agregá una línea al array MARCAS con el archivo y el nombre
+============================================================ */
+const MARCAS = [
+  { src: 'marcas/Andreu Marca.svg', alt: 'Andreu' },
+  // { src: 'marcas/OtraEmpresa.svg', alt: 'Otra Empresa' },
+];
+(function(){
+  const track = document.getElementById('marqueeTrack');
+  if (!track || !MARCAS.length) return;
+  // repetir la lista hasta tener al menos 8 logos por set,
+  // así el carrusel se ve lleno aunque haya pocas marcas cargadas
+  let items = [];
+  while (items.length < 8) items = items.concat(MARCAS);
+  // dos sets idénticos → translateX(-50%) hace el loop perfecto
+  for (let s = 0; s < 2; s++){
+    const set = document.createElement('div');
+    set.className = 'marquee-set';
+    set.setAttribute('aria-hidden', s === 1 ? 'true' : 'false');
+    items.forEach(m => {
+      const img = document.createElement('img');
+      img.src = m.src; img.alt = m.alt; img.loading = 'lazy';
+      set.appendChild(img);
+    });
+    track.appendChild(set);
+  }
+  // velocidad constante independiente de la cantidad de logos
+  track.style.setProperty('--marquee-dur', (items.length * 4.5) + 's');
 })();
 
 // menú mobile
