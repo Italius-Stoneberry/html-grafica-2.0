@@ -164,38 +164,6 @@ nav.links a:hover{color:var(--ink)}
 .point b{display:block;font-weight:600;font-size:.98rem;font-family:'Hanken Grotesk',sans-serif;color:var(--ink)}
 .point span{font-size:.88rem;color:var(--text-muted);font-weight:300}
 
-/* ---------- carrusel de marcas (Nosotros) ---------- */
-.clients{margin-top:110px}
-.clients-title{
-  text-align:center;color:var(--text-muted);margin-bottom:34px;
-  font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
-}
-.marquee{
-  overflow:hidden;position:relative;
-  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  padding:30px 0;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
-  mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
-}
-.marquee-track{display:flex;width:max-content;animation:marquee var(--marquee-dur,36s) linear infinite}
-.marquee-set{display:flex;align-items:center;gap:80px;padding-right:80px}
-.marquee-set img{
-  height:42px;width:auto;flex:none;
-  filter:grayscale(1);opacity:.55;
-  transition:filter .25s, opacity .25s;
-}
-.marquee-set img:hover{filter:none;opacity:1}
-.marquee:hover .marquee-track{animation-play-state:paused}
-@keyframes marquee{to{transform:translateX(-50%)}}
-@media (prefers-reduced-motion: reduce){
-  .marquee-track{animation:none}
-}
-@media (max-width:640px){
-  .marquee-set{gap:48px;padding-right:48px}
-  .marquee-set img{height:34px}
-  .clients{margin-top:70px}
-}
-
 /* ---------- contacto ---------- */
 .contact{background:var(--surface-low);border-top:1px solid var(--line)}
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
@@ -381,12 +349,6 @@ footer a:hover{color:var(--gold)}
     </div>
     <div class="about-visual reveal" aria-hidden="true">
       <div class="topo-holder"><canvas id="topoAbout"></canvas></div>
-    </div>
-  </div>
-  <div class="wrap clients reveal">
-    <div class="clients-title">Confían en nosotros</div>
-    <div class="marquee">
-      <div class="marquee-track" id="marqueeTrack"></div>
     </div>
   </div>
 </section>
@@ -744,38 +706,6 @@ footer a:hover{color:var(--gold)}
     }
     requestAnimationFrame(loop);
   }
-})();
-
-/* ============================================================
-   CARRUSEL DE MARCAS — para agregar una empresa:
-   1. guardá el SVG (versión oscura) en la carpeta marcas/
-   2. agregá una línea al array MARCAS con el archivo y el nombre
-============================================================ */
-const MARCAS = [
-  { src: 'marcas/Andreu Marca.svg', alt: 'Andreu' },
-  // { src: 'marcas/OtraEmpresa.svg', alt: 'Otra Empresa' },
-];
-(function(){
-  const track = document.getElementById('marqueeTrack');
-  if (!track || !MARCAS.length) return;
-  // repetir la lista hasta tener al menos 8 logos por set,
-  // así el carrusel se ve lleno aunque haya pocas marcas cargadas
-  let items = [];
-  while (items.length < 8) items = items.concat(MARCAS);
-  // dos sets idénticos → translateX(-50%) hace el loop perfecto
-  for (let s = 0; s < 2; s++){
-    const set = document.createElement('div');
-    set.className = 'marquee-set';
-    set.setAttribute('aria-hidden', s === 1 ? 'true' : 'false');
-    items.forEach(m => {
-      const img = document.createElement('img');
-      img.src = m.src; img.alt = m.alt; img.loading = 'lazy';
-      set.appendChild(img);
-    });
-    track.appendChild(set);
-  }
-  // velocidad constante independiente de la cantidad de logos
-  track.style.setProperty('--marquee-dur', (items.length * 4.5) + 's');
 })();
 
 // menú mobile
